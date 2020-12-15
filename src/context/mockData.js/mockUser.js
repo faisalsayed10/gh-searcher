@@ -1,0 +1,38 @@
+export default {
+  login: "faisalsayed10",
+  id: 36627266,
+  node_id: "MDQ6VXNlcjM2NjI3MjY2",
+  avatar_url: "https://avatars3.githubusercontent.com/u/36627266?v=4",
+  gravatar_id: "",
+  url: "https://api.github.com/users/faisalsayed10",
+  html_url: "https://github.com/faisalsayed10",
+  followers_url: "https://api.github.com/users/faisalsayed10/followers",
+  following_url:
+    "https://api.github.com/users/faisalsayed10/following{/other_user}",
+  gists_url: "https://api.github.com/users/faisalsayed10/gists{/gist_id}",
+  starred_url:
+    "https://api.github.com/users/faisalsayed10/starred{/owner}{/repo}",
+  subscriptions_url: "https://api.github.com/users/faisalsayed10/subscriptions",
+  organizations_url: "https://api.github.com/users/faisalsayed10/orgs",
+  repos_url: "https://api.github.com/users/faisalsayed10/repos",
+  events_url: "https://api.github.com/users/faisalsayed10/events{/privacy}",
+  received_events_url:
+    "https://api.github.com/users/faisalsayed10/received_events",
+  type: "User",
+  site_admin: false,
+  name: "fayd",
+  company: null,
+  blog: "fayd.me",
+  location: "India",
+  email: null,
+  hireable: null,
+  bio:
+    "Hello, there! I'm 15 and I love to code, especially web dev with React! And yes, I love gaming too! Hack Clubber @hackclub",
+  twitter_username: "faisalsayed05",
+  public_repos: 32,
+  public_gists: 3,
+  followers: 20,
+  following: 2,
+  created_at: "2018-02-19T12:11:01Z",
+  updated_at: "2020-12-09T06:33:58Z",
+};
