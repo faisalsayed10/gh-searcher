@@ -19,28 +19,26 @@ const GithubProvider = ({ children }) => {
   const searchGithubUser = async (user) => {
     toggleError();
     setLoading(true);
-    const res = await axios(`${rootUrl}/users/${user}`)
-    .catch((err) => {
-      console.error(err)
+    const res = await axios(`${rootUrl}/users/${user}`).catch((err) => {
+      console.error(err);
     });
     if (res) {
       // Setting the fetched Github user
       setGithubUser(res.data);
-      const {repos_url, followers_url} = res.data;
+      const { repos_url, followers_url } = await res.data;
 
       // Getting that user's follower list
-      const followersRes = axios(`${followers_url}?per_page=100`);
+      const followersRes = await axios(`${followers_url}?per_page=100`);
       setFollowers(followersRes.data);
 
       // Getting that user's repositories
-      const repoRes = axios(`${repos_url}?per_page=100`);
+      const repoRes = await axios(`${repos_url}?per_page=100`);
       setRepos(repoRes.data);
-
+      setLoading(false);
+      fetchRateLimit();
     } else {
       toggleError(true, "There is no user with that username");
     }
-    fetchRateLimit();
-    setLoading(false);
   };
 
   function toggleError(show = false, msg = "") {
@@ -52,20 +50,53 @@ const GithubProvider = ({ children }) => {
       const res = await axios(`${rootUrl}/rate_limit`);
       let remaining = await res.data.rate.remaining;
       setRequests(remaining);
-      await console.log(requests)
       if (remaining === 0) {
         toggleError(true, "Sorry, you have exceeded your hourly rate limit.");
       }
+      await console.log(requests);
     } catch (err) {
       console.error(err);
     }
   }
 
-  useEffect(fetchRateLimit, []);
+  useEffect(() => {
+    fetchRateLimit();
+    getLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    setLocalStorage()
+  }, [githubUser, followers, repos])
+
+  const setLocalStorage = () => {
+    localStorage.setItem("Github user", JSON.stringify(githubUser));
+    localStorage.setItem("Followers", JSON.stringify(followers));
+    localStorage.setItem("Repos", JSON.stringify(repos));
+  };
+
+  const getLocalStorage = () => {
+    if (localStorage.getItem("Github user") === null) {
+      return;
+    } else {
+      let localGhUsers = JSON.parse(localStorage.getItem("Github user"));
+      setGithubUser(localGhUsers);
+      let localGhFollowers = JSON.parse(localStorage.getItem("Followers"));
+      setFollowers(localGhFollowers);
+      let localGhRepos = JSON.parse(localStorage.getItem("Repos"));
+      setRepos(localGhRepos);
+    }
+  };
 
   return (
     <GithubContext.Provider
-      value={{ githubUser, repos, followers, error, searchGithubUser, loading }}
+      value={{
+        githubUser,
+        repos,
+        followers,
+        error,
+        searchGithubUser,
+        loading
+      }}
     >
       {children}
     </GithubContext.Provider>
