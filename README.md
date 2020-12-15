@@ -32,3 +32,5 @@
 - [Auth0 - Main Docs](https://auth0.com/)
 - [React SDK Docs](https://auth0.com/docs/libraries/auth0-react)
 - [REACT SDK API Docs](https://auth0.github.io/auth0-react/)
+
+:)
