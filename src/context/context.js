@@ -9,9 +9,9 @@ const rootUrl = "https://api.github.com";
 const GithubContext = createContext();
 
 const GithubProvider = ({ children }) => {
-  const [githubUser, setGithubUser] = useState(mockUser);
-  const [repos, setRepos] = useState(mockRepos);
-  const [followers, setFollowers] = useState(mockFollowers);
+  const [githubUser, setGithubUser] = useState([]);
+  const [repos, setRepos] = useState([]);
+  const [followers, setFollowers] = useState([]);
   const [requests, setRequests] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ show: false, msg: "" });
