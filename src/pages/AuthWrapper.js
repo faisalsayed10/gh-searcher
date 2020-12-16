@@ -1,25 +1,21 @@
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import loadingGif from "../images/preloader.gif";
-import styled from "styled-components";
-function AuthWrapper({ children }) {
-  const { isLoading, error } = useAuth0();
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import loadingGif from '../images/preloader.gif';
+import styled from 'styled-components';
+function AuthWrapper({children}) {
+  const {isLoading, error} = useAuth0();
   if (isLoading) {
     return (
       <Wrapper>
         <img src={loadingGif} alt="loading..." />
       </Wrapper>
     );
-  } else if (error) {
-    console.error(error);
-    return (
-      <Wrapper>
-        <h1>{JSON.stringify(error)}</h1>
-      </Wrapper>
-    );
-  } else {
-    return <>{children}</>;
   }
+  if (error) {
+    return <Wrapper><h1>{error.message}</h1></Wrapper>
+  }
+
+  return <>{children}</>;
 }
 
 const Wrapper = styled.section`
