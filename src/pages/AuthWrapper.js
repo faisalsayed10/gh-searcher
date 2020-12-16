@@ -7,12 +7,14 @@ function AuthWrapper({children}) {
   if (isLoading) {
     return (
       <Wrapper>
+        <p>THIS IS LOADING FROM WRAPPER</p>
         <img src={loadingGif} alt="loading..." />
       </Wrapper>
     );
   }
   if (error) {
-    return <Wrapper><h1>{error.message}</h1></Wrapper>
+    console.log(error)
+    return <Wrapper><h1>{JSON.stringify(error)}</h1></Wrapper>
   }
 
   return <>{children}</>;
